@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 
 namespace CalendatWPF
 {
-    public struct MarkedDays 
+    public struct MarkedDay 
     {
         public Month Month { get; set; }
         public int Number { get; set; }
@@ -29,7 +29,7 @@ namespace CalendatWPF
         public Month CurrentMonth { get; set; }
         public ObservableCollection<Week> Weeks { get; set; }
 
-        public List<MarkedDays> MarkedDays = new List<MarkedDays>();
+        public List<MarkedDay> MarkedDays = new List<MarkedDay>();
 
         public MainWindow()
         {
@@ -60,8 +60,19 @@ namespace CalendatWPF
 
             button.Background = new SolidColorBrush(Colors.Green);
 
-            MarkedDays.Add(new CalendatWPF.MarkedDays { Month = CurrentMonth, Number = number });
+            bool foundFlag = false;
 
+            foreach (var item in MarkedDays)
+                if (item.Number == number && item.Month == CurrentMonth) 
+                {
+                    MarkedDays.Remove(item); foundFlag = true;
+                    button.Background = new SolidColorBrush(Colors.WhiteSmoke);
+                    break;
+                }
+                    
+            if(!foundFlag)
+                MarkedDays.Add(new MarkedDay { Month = CurrentMonth, Number = number });
+            
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
