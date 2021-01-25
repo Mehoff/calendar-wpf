@@ -60,35 +60,31 @@ namespace CalendatWPF
                 switch (month.Days[i].DayOfWeek) 
                 {
                     case CalendarWPF.Classes.DayOfWeek.Monday:
-                        week.Monday = month.Days[i].Number;
+                        week.Monday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Tuesday:
-                        week.Tuesday = month.Days[i].Number;
+                        week.Tuesday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Wednesday:
-                        week.Wednesday = month.Days[i].Number;
+                        week.Wednesday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Thursday:
-                        week.Thursday = month.Days[i].Number;
+                        week.Thursday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Friday:
-                        week.Friday = month.Days[i].Number;
+                        week.Friday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Saturday:
-                        week.Saturday = month.Days[i].Number;
+                        week.Saturday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Sunday:
-                        week.Sunday = month.Days[i].Number;
+                        week.Sunday = month.Days[i].Number.ToString();
+                        Weeks.Add(week);
+                        week = new Week();
+                        dayC = 0;
                         break;
                 }
-                dayC++;
-                if (dayC == 7) 
-                {
-                    Weeks.Add(week);
-                    week = new Week();
-                    dayC = 0;
-                }
-                    
+                dayC++;     
             }
 
         }

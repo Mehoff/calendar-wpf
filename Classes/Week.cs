@@ -6,12 +6,14 @@ namespace CalendarWPF.Classes
 {
     public class Week
     {
-        public int Monday { get; set; }
-        public int Tuesday { get; set; }
-        public int Wednesday { get; set; }
-        public int Thursday { get; set; }
-        public int Friday { get; set; }
-        public int Saturday { get; set; }
-        public int Sunday { get; set; }
+        public string Monday { get; set; } = string.Empty;
+        public string Tuesday { get; set; } = string.Empty;
+        public string Wednesday { get; set; } = string.Empty;
+        public string Thursday { get; set; } = string.Empty;
+        public string Friday { get; set; } = string.Empty;
+        public string Saturday { get; set; } = string.Empty;
+        public string Sunday { get; set; } = string.Empty;
+
+
     }
 }
