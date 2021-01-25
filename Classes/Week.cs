@@ -14,6 +14,5 @@ namespace CalendarWPF.Classes
         public string Saturday { get; set; } = string.Empty;
         public string Sunday { get; set; } = string.Empty;
 
-
     }
 }

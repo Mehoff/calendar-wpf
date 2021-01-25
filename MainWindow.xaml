@@ -9,13 +9,22 @@
         mc:Ignorable="d"
         
         Loaded="Window_Loaded"
-        Title="Календарь" Height="450" Width="800">
+        Title="Календарь" Height="600" Width="310">
 
 
     <Window.Resources>
         <Style TargetType="RadioButton">
             <Setter Property="GroupName" Value="Radio"/>
             <EventSetter Event="Checked" Handler="MonthRadioButton_Checked"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <EventSetter Event="Click" Handler="DayClick"/>
+        </Style>
+        <Style TargetType="GridViewColumn">
+            <Setter Property="Width" Value="40"/>
         </Style>
     </Window.Resources>
 
@@ -49,58 +58,58 @@
             <ListView x:Name="lsView">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="40" Header="Пн.">
+                        <GridViewColumn Header="Пн.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Monday}"/>
+                                    <Button Content="{Binding Monday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Вт.">
+                        <GridViewColumn Header="Вт.">
                             <GridViewColumn.CellTemplate>   
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Tuesday}"/>
+                                    <Button Content="{Binding Tuesday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Ср.">
+                        <GridViewColumn Header="Ср.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Wednesday}"/>
+                                    <Button Content="{Binding Wednesday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Чт.">
+                        <GridViewColumn Header="Чт.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Thursday}"/>
+                                    <Button Content="{Binding Thursday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Пт.">
+                        <GridViewColumn Header="Пт.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Friday}"/>
+                                    <Button Content="{Binding Friday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Сб.">
+                        <GridViewColumn Header="Сб.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Saturday}"/>
+                                    <Button Content="{Binding Saturday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="40" Header="Вс.">
+                        <GridViewColumn Header="Вс.">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="25" Height="25" Content="{Binding Sunday}"/>
+                                    <Button Content="{Binding Sunday}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

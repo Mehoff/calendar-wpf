@@ -17,16 +17,19 @@ using System.Windows.Shapes;
 
 namespace CalendatWPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    public struct MarkedDays 
+    {
+        public Month Month { get; set; }
+        public int Number { get; set; }
+    };
     public partial class MainWindow : Window
     {
 
         public Year Year { get; set; }
         public Month CurrentMonth { get; set; }
-
         public ObservableCollection<Week> Weeks { get; set; }
+
+        public List<MarkedDays> MarkedDays = new List<MarkedDays>();
 
         public MainWindow()
         {
@@ -44,6 +47,23 @@ namespace CalendatWPF
             lsView.ItemsSource = Weeks;
 
         }
+        private void DayClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (button.Content.ToString() == string.Empty)
+                return;
+
+            int number = Convert.ToInt32(button.Content.ToString());
+
+            MessageBox.Show($"Помечено: {CurrentMonth.Name} {number}");
+
+            button.Background = new SolidColorBrush(Colors.Green);
+
+            MarkedDays.Add(new CalendatWPF.MarkedDays { Month = CurrentMonth, Number = number });
+
+
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Year = new Year();
@@ -54,12 +74,17 @@ namespace CalendatWPF
             Weeks = new ObservableCollection<Week>();
 
             var week = new Week();
-            int dayC = 0;
             for (int i = 0; i < month.Days.Count; i++) 
             {
+                if (MarkedDays.Count(day => day.Month == CurrentMonth && day.Number == i) > 0) 
+                {
+                    MessageBox.Show($"{CurrentMonth.Name} - {i}");
+                }
+
                 switch (month.Days[i].DayOfWeek) 
                 {
                     case CalendarWPF.Classes.DayOfWeek.Monday:
+                        week = new Week();
                         week.Monday = month.Days[i].Number.ToString();
                         break;
                     case CalendarWPF.Classes.DayOfWeek.Tuesday:
@@ -81,10 +106,15 @@ namespace CalendatWPF
                         week.Sunday = month.Days[i].Number.ToString();
                         Weeks.Add(week);
                         week = new Week();
-                        dayC = 0;
                         break;
                 }
-                dayC++;     
+                if (i == month.Days.Count - 1 
+                    && month.Days[i].DayOfWeek 
+                    != CalendarWPF.Classes.DayOfWeek.Sunday)
+                {
+                    Weeks.Add(week);
+                    week = new Week();
+                }
             }
 
         }
@@ -92,6 +122,7 @@ namespace CalendatWPF
         {
             CurrentMonth = Year.Months[(int)month];
         }
+
 
 
     }
