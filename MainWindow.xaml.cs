@@ -1,6 +1,7 @@
 ﻿using CalendarWPF.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,10 @@ namespace CalendatWPF
     {
 
         public Year Year { get; set; }
+        public Month CurrentMonth { get; set; }
+
+        public ObservableCollection<Week> Weeks { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();   
@@ -32,26 +37,64 @@ namespace CalendatWPF
         {
             RadioButton button = (RadioButton)sender;
 
-
             LoadMonth((MonthName)Convert.ToInt32(button.Tag));
+
+            LoadWeeks(CurrentMonth);
+
+            lsView.ItemsSource = Weeks;
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Year = new Year();
         }
-        private void LoadMonth(MonthName month) 
+
+        private void LoadWeeks(Month month) 
         {
-            StringBuilder sb = new StringBuilder();
+            Weeks = new ObservableCollection<Week>();
 
-            var _month = Year.Months[(int)month];
-
-            sb.Append(_month.Name + "\n");
-            foreach (var day in _month.Days) 
+            var week = new Week();
+            int dayC = 0;
+            for (int i = 0; i < month.Days.Count; i++) 
             {
-                sb.Append($" {day.Number} | {day.DayOfWeek}\n");
+                switch (month.Days[i].DayOfWeek) 
+                {
+                    case CalendarWPF.Classes.DayOfWeek.Monday:
+                        week.Monday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Tuesday:
+                        week.Tuesday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Wednesday:
+                        week.Wednesday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Thursday:
+                        week.Thursday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Friday:
+                        week.Friday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Saturday:
+                        week.Saturday = month.Days[i].Number;
+                        break;
+                    case CalendarWPF.Classes.DayOfWeek.Sunday:
+                        week.Sunday = month.Days[i].Number;
+                        break;
+                }
+                dayC++;
+                if (dayC == 7) 
+                {
+                    Weeks.Add(week);
+                    week = new Week();
+                    dayC = 0;
+                }
+                    
             }
 
-            MessageBox.Show(sb.ToString());
+        }
+        private void LoadMonth(MonthName month) 
+        {
+            CurrentMonth = Year.Months[(int)month];
         }
 
 
